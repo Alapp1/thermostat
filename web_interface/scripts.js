@@ -1,8 +1,7 @@
 const BASE_URL =
     window.location.hostname === 'localhost'
         ? 'http://localhost:3000' // Local backend
-        : 'https://thermostat-ejn58or4x-alapp1s-projects.vercel.app/';
-
+        : 'https://thermostat-ejn58or4x-alapp1s-projects.vercel.app';
 
 // Login button click event
 document.getElementById('loginButton').addEventListener('click', () => {
@@ -10,7 +9,7 @@ document.getElementById('loginButton').addEventListener('click', () => {
     const password = document.getElementById('password').value;
 
     // Send login request to the server
-    fetch('${BASE_URL}/login', {
+    fetch(`${BASE_URL}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -44,7 +43,7 @@ document.getElementById('offButton').addEventListener('click', () => {
 
 // Function to send command to the server
 function sendCommand(command) {
-    fetch('/setThermostat', {
+    fetch(`${BASE_URL}/setThermostat`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -78,63 +77,34 @@ document.getElementById('addOffTimeButton').addEventListener('click', () => {
         addSchedule('off', offTime);
     }
 });
-function registerUser(username, password) {
-    fetch('/api/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-    })
-        .then(response => {
-            if (response.ok) {
-                alert('User registered successfully');
-            } else {
-                alert('Failed to register user');
-            }
-        })
-        .catch(error => {
-            console.error('Error registering user:', error);
-            alert('An error occurred');
-        });
-}
 
 // Function to add a schedule
 function addSchedule(command, time) {
-    // Determine which list to add to
     const list = command === 'cool' ? document.getElementById('coolTimesList') : document.getElementById('offTimesList');
 
-    // Prevent duplication by checking if the time already exists in the list
     const existingItems = Array.from(list.children);
     if (existingItems.some(item => item.dataset.time === time)) {
         console.log('This schedule already exists.');
-        return; // Stop the function if the time is already scheduled
+        return;
     }
 
-    // Create list item
     const listItem = document.createElement('li');
-    listItem.dataset.time = time; // Store time in dataset for easier removal lookup
+    listItem.dataset.time = time;
     listItem.textContent = `${time} `;
 
-    // Create remove button
     const removeButton = document.createElement('button');
     removeButton.textContent = 'Remove';
     removeButton.classList.add('remove-button');
 
-    // Add click event listener to the remove button
     removeButton.addEventListener('click', () => {
         list.removeChild(listItem);
         removeSchedule(command, time);
     });
 
-    // Append remove button to list item
     listItem.appendChild(removeButton);
-
-    // Add list item to the respective list
     list.appendChild(listItem);
 
-    // Send the schedule to the backend only after adding to the UI
-    fetch('${BASE_URL}/setSchedule', {
+    fetch(`${BASE_URL}/setSchedule`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -155,8 +125,7 @@ function addSchedule(command, time) {
 
 // Function to remove a schedule
 function removeSchedule(command, time) {
-    // Send a request to the backend to remove the schedule
-    fetch('${BASE_URL}/removeSchedule', {
+    fetch(`${BASE_URL}/removeSchedule`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -172,6 +141,28 @@ function removeSchedule(command, time) {
     })
     .catch(error => {
         console.error('Error removing schedule:', error);
+    });
+}
+
+// Register user functionality
+function registerUser(username, password) {
+    fetch(`${BASE_URL}/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('User registered successfully');
+        } else {
+            alert('Failed to register user');
+        }
+    })
+    .catch(error => {
+        console.error('Error registering user:', error);
+        alert('An error occurred');
     });
 }
 
