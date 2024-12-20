@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thermostat Control</title>
+    <title>Thermostat Control Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Thermostat Control</h1>
+        <h1>Thermostat Control Dashboard</h1>
 
-        <!-- Login Form -->
+        <!-- Login Section -->
         <div id="loginSection">
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
@@ -22,10 +22,26 @@
             <button id="coolButton">Set to Cool</button>
             <button id="offButton">Turn Off</button>
             <p id="status">Status: Ready</p>
+
+            <!-- Schedule Section -->
+            <div id="scheduleSection">
+                <h2>Schedule Times</h2>
+                <div class="schedule-column">
+                    <h3>Cool Times</h3>
+                    <input type="time" id="coolTimeInput">
+                    <button id="addCoolTimeButton">Add Cool Time</button>
+                    <ul id="coolTimesList"></ul>
+                </div>
+                <div class="schedule-column">
+                    <h3>Off Times</h3>
+                    <input type="time" id="offTimeInput">
+                    <button id="addOffTimeButton">Add Off Time</button>
+                    <ul id="offTimesList"></ul>
+                </div>
+            </div>
         </div>
     </div>
     <script src="scripts.js"></script>
 </body>
 </html>
-
 

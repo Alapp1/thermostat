@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import authRoutes from './routes/authRoutes.js';
 import thermostatRoutes from './routes/thermostatRoutes.js';
-
+import { addSchedule } from './controllers/schedulerController.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,12 +37,15 @@ app.use(express.static(path.join(process.cwd(), '../')));
 app.use(authRoutes);
 app.use(thermostatRoutes);
 
+// Register schedule route
+app.post('/setSchedule', addSchedule);
+
 // Serve HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), '../index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });
 
