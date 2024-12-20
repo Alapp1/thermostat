@@ -25,7 +25,10 @@
     "AIO_KEY": "@aio_key"
   }
   "rewrites": [
-    { "source": "/login", "destination": "/authRoutes"}
+    { "source": "/login", "destination": "/login" },
+    { "source": "/setThermostat", "destination": "/setThermostat" },
+    { "source": "/setSchedule", "destination": "/setSchedule" },
+    { "source": "/removeSchedule", "destination": "/removeSchedule" }
   ]
 }
 
