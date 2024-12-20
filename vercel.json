@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "web_interface/index.html",
+      "use": "@vercel/static" 
+    },
+    {
+      "src": "web_interface/backend/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "web_interface/backend/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "web_interface/index.html"
+    }
+  ],
+  "env": {
+    "AIO_USERNAME": "@aio_username",
+    "AIO_KEY": "@aio_key"
+  }
+  "rewrites": [
+    { "source": "/login", "destination": "/authRoutes"}
+  ]
+}
+

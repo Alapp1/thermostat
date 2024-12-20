@@ -16,19 +16,19 @@ document.getElementById('loginButton').addEventListener('click', () => {
         },
         body: JSON.stringify({ username, password })
     })
-    .then(response => {
-        if (response.ok) {
-            // Hide login section and show control section if login is successful
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('controlSection').style.display = 'block';
-        } else {
-            alert('Invalid credentials. Please try again.');
-        }
-    })
-    .catch(error => {
-        console.error('Login error:', error);
-        alert('An error occurred during login. Please check your network connection.');
-    });
+        .then(response => {
+            if (response.ok) {
+                // Hide login section and show control section if login is successful
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('controlSection').style.display = 'block';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Login error:', error);
+            alert('An error occurred during login. Please check your network connection.');
+        });
 });
 
 // Cool button click event
@@ -50,17 +50,17 @@ function sendCommand(command) {
         },
         body: JSON.stringify({ command: command })
     })
-    .then(response => {
-        if (response.ok) {
-            document.getElementById('status').innerText = `Status: Command "${command}" sent successfully.`;
-        } else {
-            throw new Error('Failed to send command');
-        }
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        document.getElementById('status').innerText = 'Status: Error sending command.';
-    });
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('status').innerText = `Status: Command "${command}" sent successfully.`;
+            } else {
+                throw new Error('Failed to send command');
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            document.getElementById('status').innerText = 'Status: Error sending command.';
+        });
 }
 
 // Schedule functionality
@@ -111,16 +111,16 @@ function addSchedule(command, time) {
         },
         body: JSON.stringify({ command: command, time: time })
     })
-    .then(response => {
-        if (response.ok) {
-            console.log(`Scheduled ${command} at ${time}`);
-        } else {
-            console.error('Failed to schedule time');
-        }
-    })
-    .catch(error => {
-        console.error('Error scheduling time:', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                console.log(`Scheduled ${command} at ${time}`);
+            } else {
+                console.error('Failed to schedule time');
+            }
+        })
+        .catch(error => {
+            console.error('Error scheduling time:', error);
+        });
 }
 
 // Function to remove a schedule
@@ -132,16 +132,16 @@ function removeSchedule(command, time) {
         },
         body: JSON.stringify({ command: command, time: time })
     })
-    .then(response => {
-        if (response.ok) {
-            console.log(`Removed ${command} at ${time}`);
-        } else {
-            console.error('Failed to remove schedule');
-        }
-    })
-    .catch(error => {
-        console.error('Error removing schedule:', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                console.log(`Removed ${command} at ${time}`);
+            } else {
+                console.error('Failed to remove schedule');
+            }
+        })
+        .catch(error => {
+            console.error('Error removing schedule:', error);
+        });
 }
 
 // Register user functionality
@@ -153,16 +153,16 @@ function registerUser(username, password) {
         },
         body: JSON.stringify({ username, password }),
     })
-    .then(response => {
-        if (response.ok) {
-            alert('User registered successfully');
-        } else {
-            alert('Failed to register user');
-        }
-    })
-    .catch(error => {
-        console.error('Error registering user:', error);
-        alert('An error occurred');
-    });
+        .then(response => {
+            if (response.ok) {
+                alert('User registered successfully');
+            } else {
+                alert('Failed to register user');
+            }
+        })
+        .catch(error => {
+            console.error('Error registering user:', error);
+            alert('An error occurred');
+        });
 }
 
