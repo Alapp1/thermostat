@@ -1,7 +1,7 @@
 const BASE_URL =
     window.location.hostname === 'localhost'
         ? 'http://localhost:3000' // Local backend
-        : 'https://your-vercel-backend.vercel.app'; // Vercel backend
+        : 'hhttps://thermostat-git-main-alapp1s-projects.vercel.app;// Vercel backend
 
 
 // Login button click event
