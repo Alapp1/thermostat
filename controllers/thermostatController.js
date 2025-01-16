@@ -25,13 +25,13 @@ export const setThermostat = async (req, res) => {
     });
 
     if (response.ok) {
-      res.status(200).send(`Command "${command}" sent successfully.`);
+      res.status(200).json({message: `Command "${command}" sent successfully.`});
     } else {
-      res.status(500).send('Failed to send command');
+      res.status(500).json({message: 'Failed to send command'});
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred');
+    res.status(500).json({message: 'An error occurred'});
   }
 };
 
