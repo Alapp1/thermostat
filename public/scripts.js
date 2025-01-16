@@ -1,7 +1,9 @@
 // scripts.js
-
-const BASE_URL = window.location.origin; 
-
+//const BASE_URL = window.location.origin;
+const BASE_URL =
+  window.location.hostname === 'localhost'
+    ? 'http://localhost:8080/api' // Local development
+    : `${window.location.protocol}//${window.location.host}/api`; // Production
 
 // Login 
 document.getElementById('loginButton').addEventListener('click', async () => {
@@ -9,7 +11,7 @@ document.getElementById('loginButton').addEventListener('click', async () => {
   const password = document.getElementById('password').value;
 
   try {
-    const res = await fetch(`${BASE_URL}/api/login`, {
+    const res = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })

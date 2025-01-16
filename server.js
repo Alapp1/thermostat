@@ -30,7 +30,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/api', authRoutes); 
 app.use('/api', thermostatRoutes);
 
-/*
 // Serve front-end static files
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-*/
 
 // Start the server
 const PORT = process.env.PORT || 3000;
