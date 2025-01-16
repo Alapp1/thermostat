@@ -14,7 +14,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware for parsing JSON
 app.use(express.json());
@@ -31,16 +30,19 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use(authRoutes); 
 app.use(thermostatRoutes); 
 
+
+
 // Serve front-end static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Catch-all route for front-end
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 

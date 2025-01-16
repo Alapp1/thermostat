@@ -1,12 +1,15 @@
 // scripts.js
 
+const BASE_URL = window.location.origin;
+
+
 // Login 
 document.getElementById('loginButton').addEventListener('click', async () => {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
   try {
-    const res = await fetch('/login', {
+    const res = await fetch('${BASE_URL}/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
