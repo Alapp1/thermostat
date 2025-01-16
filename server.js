@@ -27,15 +27,14 @@ mongoose.connect(process.env.MONGODB_URI, {
   .catch(err => console.error('Database connection error:', err));
 
 // Use routes
-app.use(authRoutes); 
+app.use('/api', authRoutes); 
 app.use((req, res, next) => {
   console.log(`Incoming request: ${req.method} ${req.url}`);
   next();
 });
 
-// DEBUGGING LOGIN ISSUE
 
-app.use(thermostatRoutes); 
+app.use('/api', thermostatRoutes); 
 
 
 
