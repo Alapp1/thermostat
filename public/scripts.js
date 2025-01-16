@@ -1,6 +1,6 @@
 // scripts.js
 
-const BASE_URL = https://thermostat-production.up.railway.app/
+const BASE_URL = window.location.origin; 
 
 
 // Login 
@@ -9,7 +9,7 @@ document.getElementById('loginButton').addEventListener('click', async () => {
   const password = document.getElementById('password').value;
 
   try {
-    const res = await fetch('${BASE_URL}/login', {
+    const res = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
