@@ -1,0 +1,102 @@
+/* General Container Styling */
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Info Box Styling */
+.info-box {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: white;
+    color: black;
+}
+
+.info-box h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.info-box p {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.info-box strong {
+    color: black;
+}
+
+.test-username, .test-password {
+    font-weight: bold;
+    color: black;
+}
+
+/* Login Section Styling */
+#loginSection {
+    margin-top: 10px;
+}
+
+#loginSection input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+}
+
+#loginSection input::placeholder {
+    color: black;
+}
+
+#loginSection button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#loginSection button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Control Section Styling */
+#controlSection button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#controlSection button:hover {
+    background-color: black;
+    color: white;
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: black;
+}
+
