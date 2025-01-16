@@ -1,6 +1,6 @@
 // scripts.js
 
-const BASE_URL = window.location.origin;
+const BASE_URL = https://thermostat-production.up.railway.app/
 
 
 // Login 
