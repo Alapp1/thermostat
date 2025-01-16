@@ -11,6 +11,14 @@
     <div class="container">
         <h1>Thermostat Control Dashboard</h1>
 
+        <!-- Test User Credentials Section -->
+        <div id="testUserInfo" class="info-box">
+            <h2>Test User Credentials</h2>
+            <p><strong>Username:</strong> <span class="test-username">test</span></p>
+            <p><strong>Password:</strong> <span class="test-password">123</span></p>
+            <p>Use these credentials to explore the application in test mode.</p>
+        </div>
+
         <!-- Login Section -->
         <div id="loginSection">
             <input type="text" id="username" placeholder="Username">
@@ -26,26 +34,10 @@
 
             <!-- Logout Button -->
             <button id="logoutButton">Logout</button>
-
-            <!-- Schedule Section -->
-            <div id="scheduleSection">
-                <h2>Schedule Times</h2>
-                <div class="schedule-column">
-                    <h3>Cool Times</h3>
-                    <input type="time" id="coolTimeInput">
-                    <button id="addCoolTimeButton">Add Cool Time</button>
-                    <ul id="coolTimesList"></ul>
-                </div>
-                <div class="schedule-column">
-                    <h3>Off Times</h3>
-                    <input type="time" id="offTimeInput">
-                    <button id="addOffTimeButton">Add Off Time</button>
-                    <ul id="offTimesList"></ul>
-                </div>
-            </div>
         </div>
     </div>
     <script src="scripts.js"></script>
 </body>
 </html>
+
 
