@@ -15,9 +15,6 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Middleware for parsing JSON
-app.use(express.json());
-
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -28,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Serve front-end static files
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.json());
 // Use routes
 app.use('/api', authRoutes); 
 app.use('/api', thermostatRoutes);
