@@ -1,10 +1,9 @@
 // scripts.js
 //const BASE_URL = window.location.origin;
-const BASE_URL =
-  window.location.hostname === 'localhost'
-    ? 'http://localhost:8080/api' // Local development
-    : `${window.location.protocol}//${window.location.host}/api`; // Production
-
+  const BASE_URL =
+    window.location.hostname === 'localhost'
+      ? 'http://localhost:3000/api'
+      : `${window.location.protocol}//${window.location.host}/api`;
 // Login 
 document.getElementById('loginButton').addEventListener('click', async () => {
   const username = document.getElementById('username').value;
