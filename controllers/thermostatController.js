@@ -1,4 +1,5 @@
 // controllers/thermostatController.js
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -9,12 +10,13 @@ const AIO_KEY = process.env.AIO_KEY;
 const FEED_KEY = 'thermostat';
 
 export const setThermostat = async (req, res) => {
-  const { command } = req.body; // e.g., "cool" or "off"
-  if (!command) {
-    return res.status(400).send('Command is required');
-  }
-
   try {
+    const { command } = req.body; // e.g., "cool" or "off"
+    const { isTestUser } = req.user;
+    if (isTestUser) {
+      return res.status(200).json({ message: `Simulated: Thermostat switched to ${command}` });
+    }
+
     const response = await fetch(`https://io.adafruit.com/api/v2/${AIO_USERNAME}/feeds/${FEED_KEY}/data`, {
       method: 'POST',
       headers: {

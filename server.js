@@ -1,15 +1,15 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import authRoutes from './routes/authRoutes.js';
 import thermostatRoutes from './routes/thermostatRoutes.js';
 
 dotenv.config();
 
-// Fix __dirname 
+// Needed for ES Modules 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -25,8 +25,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Serve front-end static files
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.json());
-// Use routes
+app.use(cookieParser());
+
 app.use('/api', authRoutes); 
 app.use('/api', thermostatRoutes);
 
@@ -37,7 +39,6 @@ app.get('*', (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

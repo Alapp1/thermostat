@@ -1,11 +1,10 @@
 // scripts.js
-//const BASE_URL = window.location.origin;
 const BASE_URL =
   window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
     : `${window.location.protocol}//${window.location.host}/api`;
 
-// Login 
+// Login
 document.getElementById('loginButton').addEventListener('click', async () => {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
@@ -14,8 +13,9 @@ document.getElementById('loginButton').addEventListener('click', async () => {
     const res = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     });
+    const data = await res.json();
 
     if (res.ok) {
       document.getElementById('loginSection').style.display = 'none';
@@ -29,7 +29,7 @@ document.getElementById('loginButton').addEventListener('click', async () => {
   }
 });
 
-// Thermostat 
+// Thermostat Commands
 document.getElementById('coolBtn').addEventListener('click', () => {
   sendThermostatCommand('cool');
 });
@@ -38,11 +38,25 @@ document.getElementById('offBtn').addEventListener('click', () => {
 });
 
 async function sendThermostatCommand(command) {
+  // Get CSRF token from cookies
+  const csrfToken = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('csrfToken='))
+    ?.split('=')[1];
+
+  if (!csrfToken) {
+    alert('CSRF token missing. Please refresh the page or log in again.');
+    return;
+  }
+
   try {
     const res = await fetch(`${BASE_URL}/setThermostat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ command })
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken, // Include CSRF token in the request
+      },
+      body: JSON.stringify({ command }),
     });
 
     if (res.ok) {
@@ -56,4 +70,21 @@ async function sendThermostatCommand(command) {
     document.getElementById('status').innerText = 'Error occurred.';
   }
 }
+
+// Logout
+document.getElementById('logoutButton').addEventListener('click', async () => {
+  try {
+    const res = await fetch(`${BASE_URL}/logout`, { method: 'POST' });
+
+    if (res.ok) {
+      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('controlSection').style.display = 'none';
+    } else {
+      alert('Failed to log out.');
+    }
+  } catch (err) {
+    console.error('Error logging out:', err);
+    alert('An error occurred while logging out.');
+  }
+});
 

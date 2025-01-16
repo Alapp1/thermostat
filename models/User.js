@@ -7,10 +7,13 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  // We'll store hashed passwords, not plain text
   hashedPassword: {
     type: String,
     required: true
+  },
+  isTestUser: {
+    type: Boolean,
+    default: false
   },
 });
 
