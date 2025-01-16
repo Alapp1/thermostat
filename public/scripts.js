@@ -1,21 +1,30 @@
+// scripts.js
+
+// Login 
 document.getElementById('loginButton').addEventListener('click', async () => {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  const res = await fetch('/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
-  });
+  try {
+    const res = await fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
 
-  if (res.ok) {
-    document.getElementById('loginSection').style.display = 'none';
-    document.getElementById('controlSection').style.display = 'block';
-  } else {
-    alert('Invalid credentials');
+    if (res.ok) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('controlSection').style.display = 'block';
+    } else {
+      alert('Invalid credentials');
+    }
+  } catch (err) {
+    console.error('Error logging in:', err);
+    alert('An error occurred while logging in.');
   }
 });
 
+// Thermostat 
 document.getElementById('coolBtn').addEventListener('click', () => {
   sendThermostatCommand('cool');
 });
@@ -30,10 +39,16 @@ async function sendThermostatCommand(command) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ command })
     });
-    const text = await res.text();
-    document.getElementById('status').innerText = text;
+
+    if (res.ok) {
+      const data = await res.json();
+      document.getElementById('status').innerText = data.message;
+    } else {
+      document.getElementById('status').innerText = 'Failed to send command.';
+    }
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error sending thermostat command:', err);
+    document.getElementById('status').innerText = 'Error occurred.';
   }
 }
 
