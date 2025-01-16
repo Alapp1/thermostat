@@ -28,18 +28,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Use routes
 app.use('/api', authRoutes); 
-app.use((req, res, next) => {
-  console.log(`Incoming request: ${req.method} ${req.url}`);
-  next();
-});
-
-
-app.use('/api', thermostatRoutes); 
-
-
+app.use('/api', thermostatRoutes);
 
 // Serve front-end static files
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // Catch-all route for front-end
 app.get('*', (req, res) => {
