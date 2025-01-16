@@ -26,12 +26,12 @@ mongoose.connect(process.env.MONGODB_URI, {
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Database connection error:', err));
 
+// Serve front-end static files
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Use routes
 app.use('/api', authRoutes); 
 app.use('/api', thermostatRoutes);
-
-// Serve front-end static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Catch-all route for front-end
 app.get('*', (req, res) => {
