@@ -31,7 +31,7 @@ app.use('/api', authRoutes);
 app.use('/api', thermostatRoutes);
 
 // Serve front-end static files
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Catch-all route for front-end
 app.get('*', (req, res) => {
@@ -40,7 +40,14 @@ app.get('*', (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
+
+app.post('/api/login', (req, res) => {
+  console.log('Debug: POST /api/login route hit');
+  res.json({ message: 'Route works' });
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
 
