@@ -164,4 +164,5 @@ This project is deployed on [Railway](https://railway.app) for cloud-based acces
 ---
 
 ## Contact
-Feel free to reach out for any questions or contributions! 
+Try out the [website](https://thermostat.up.railway.app/)!
+Feel free to reach out for any questions or contributions. 
