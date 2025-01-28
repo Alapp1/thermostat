@@ -17,3 +17,12 @@ export const authenticateToken = (req, res, next) => {
   }
 };
 
+export const restrictTestUser = (req, res, next) => {
+  if (req.user?.isTestUser) {
+    console.log(`Simulating: Attempt to add schedule by test user.`);
+    return res.status(200).json({
+      message: `Simulating command...`,
+    });
+  }
+  next(); // Allow real users to proceed
+};

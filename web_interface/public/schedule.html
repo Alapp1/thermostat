@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thermostat Schedule</title>
+  <link rel="stylesheet" href="scheduleStyles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Thermostat Schedule</h1>
+
+    <div id="scheduleSection">
+      <!-- The Schedule List -->
+      <ul id="scheduleList"></ul>
+
+      <!-- Add Schedule Form -->
+      <input type="time" id="scheduleTime" />
+      <select id="scheduleMode">
+        <option value="cool">Cool</option>
+        <option value="heat">Heat</option>
+        <option value="off">Off</option>
+      </select>
+      <label>
+        <input type="checkbox" id="scheduleRecurring" /> Recurring (Daily)
+      </label>
+      <button id="addScheduleButton">Add to Schedule</button>
+    </div>
+
+    <button id="backToControlButton">Back to Control</button>
+  </div>
+
+  <script src="schedule.js"></script>
+</body>
+</html>
